@@ -24,41 +24,41 @@
     $db_handle = dbConnect();
     # Check the user is valid.
     $this_user_id = dbValidateUser($db_handle, $this_user_name);
+    # Redirect if invalid. This will be annoying during initial setup as it means
+    # you must have an entry in the database corresponding to the user in the GET.
+    if ($this_user_id < 0) {
+        header('Location: ' . filter_var($not_logged_in_redirect, FILTER_SANITIZE_URL));
+    }
 
     # Handle All POST requests.
     # Handle adds
     if (isset($_POST[$ADD_BASE_ID])) {
         $item_description = $_POST[$ADD_BASE_ID];
         if ($item_description != null and !empty($item_description)) {
-            #echo 'To Add: "' . $item_description . '"';
             dbAddItem($db_handle, $this_user_id, $item_description);
         }
     }
     # Handle deletes
     if (isset($_POST[$DELETE_BASE_ID])) {
         foreach ($_POST[$DELETE_BASE_ID] as $item_id=>$item_data) {
-            #echo 'To Delete: "' . $item_id . '" : "' . $item_data . '"';
             dbDeleteItem($db_handle, $item_id);
         }
     }
     # Handle edits
     if (isset($_POST[$EDIT_BASE_ID])) {
         foreach ($_POST[$EDIT_BASE_ID] as $item_id=>$item_data) {
-            #echo 'To Edit: "' . $item_id . '" : "' . $item_data . '"';
             dbEditItem($db_handle, $item_id, $item_data);
         }
     }
     # Handle boughts
     if (isset($_POST[$BOUGHT_BASE_ID])) {
         foreach ($_POST[$BOUGHT_BASE_ID] as $item_id=>$item_data) {
-            #echo 'To Bought: "' . $item_id . '" : "' . $item_data . '"';
             dbMarkBought($db_handle, $this_user_id, $item_id);
         }
     }
     # Handle unboughts
     if (isset($_POST[$UNBOUGHT_BASE_ID])) {
         foreach ($_POST[$UNBOUGHT_BASE_ID] as $item_id=>$item_data) {
-            #echo 'To Unbought: "' . $item_id . '" : "' . $item_data . '"';
             dbMarkUnbought($db_handle, $item_id);
         }
     }

@@ -4,10 +4,9 @@ function dbConnect() {
     $db_hostname = 'localhost';
     $db_database = 'xmas_list';
     $db_username = 'root';
-    $db_password = 'root';
+    $db_password = '';
 
     # Connect
-    ini_set('display_errors', 1);
     $db_handle = new PDO("mysql:host=$db_hostname;dbname=$db_database", $db_username, $db_password);
     $db_handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
@@ -49,7 +48,6 @@ function dbGetAllUsersItems($db_handle) {
 }
 
 function dbAddItem($db_handle, $user_id, $item_description) {
-    #$item_description = escapeString($item_description);
     $statement = $db_handle->prepare("INSERT INTO items (requester_id, description) VALUES (:user_id, :description)");
     $statement->execute(array(':user_id' => $user_id, ':description' => $item_description));
 }
@@ -60,7 +58,6 @@ function dbDeleteItem($db_handle, $item_id) {
 }
 
 function dbEditItem($db_handle, $item_id, $item_description) {
-    #$item_description = escapeString($item_description);
     $statement = $db_handle->prepare("UPDATE items SET description = :description WHERE item_id = :item_id");
     $statement->execute(array(':item_id' => $item_id, ':description' => $item_description));
 }
