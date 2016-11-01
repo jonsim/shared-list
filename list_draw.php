@@ -19,10 +19,13 @@ function drawDescription($item_id, $item_description, $is_this_user, $is_bought)
     # Print the item description (optionally crossed through).
     $strike = (!$is_this_user && $is_bought);
     $output  = '<span class="listcontent" ';
+    if ($strike) {
+        $output .= 'title="Item is marked as bought by someone else" ';
+    }
     $output .=   'id="'.formId($DESCRIPTION_BASE_ID, $item_id).'">';
     if ($strike) {
         $output .= '<strike>';
-    };
+    }
     $output .= autoLink($item_description);
     if ($strike) {
         $output .= '</strike>';
@@ -40,7 +43,8 @@ function drawEditButton($item_id, $item_description) {
     # the page in an onclick)!
     $item_description = addslashes(htmlspecialchars($item_description));
     $output  = '<button type="button" ';
-    $output .=     'id="'.formId($EDIT_BASE_ID . '_button', $item_id).'" ';
+    $output .=   'title="Edit this entry" ';
+    $output .=   'id="'  .formId($EDIT_BASE_ID . '_button', $item_id).'" ';
     $output .=   'name="'.formId($EDIT_BASE_ID . '_button', $item_id).'" ';
     $output .=   'onclick="editItem('.$item_id.', \''.$item_description.'\')">';
     $output .= '<i class="fa fa-pencil fa-fw"></i>';
@@ -51,7 +55,8 @@ function drawEditButton($item_id, $item_description) {
 function drawDeleteButton($item_id) {
     global $DELETE_BASE_ID;
     $output  = '<button type="submit" ';
-    $output .=     'id="'.formId($DELETE_BASE_ID, $item_id).'" ';
+    $output .=   'title="Delete this entry" ';
+    $output .=   'id="'  .formId($DELETE_BASE_ID, $item_id).'" ';
     $output .=   'name="'.formId($DELETE_BASE_ID, $item_id).'">';
     $output .= '<i class="fa fa-trash fa-fw"></i>';
     $output .= '</button>';
@@ -61,7 +66,8 @@ function drawDeleteButton($item_id) {
 function drawBoughtButton($item_id) {
     global $BOUGHT_BASE_ID;
     $output  = '<button type="submit" ';
-    $output .=     'id="'.formId($BOUGHT_BASE_ID, $item_id).'" ';
+    $output .=   'title="Mark this item as bought (not visible to requester)" ';
+    $output .=   'id="'  .formId($BOUGHT_BASE_ID, $item_id).'" ';
     $output .=   'name="'.formId($BOUGHT_BASE_ID, $item_id).'">';
     $output .= '<i class="fa fa-shopping-cart fa-fw"></i>';
     $output .= '</button>';
@@ -71,7 +77,8 @@ function drawBoughtButton($item_id) {
 function drawUnboughtButton($item_id) {
     global $UNBOUGHT_BASE_ID;
     $output  = '<button type="submit" ';
-    $output .=     'id="'.formId($UNBOUGHT_BASE_ID, $item_id).'" ';
+    $output .=   'title="Unmark this item as bought (not visible to requester)" ';
+    $output .=   'id="'  .formId($UNBOUGHT_BASE_ID, $item_id).'" ';
     $output .=   'name="'.formId($UNBOUGHT_BASE_ID, $item_id).'">';
     $output .= '<i class="fa fa-unlock fa-fw"></i>';
     $output .= '</button>';
@@ -81,8 +88,9 @@ function drawUnboughtButton($item_id) {
 function drawAddButton() {
     global $ADD_BASE_ID;
     $output  = '<button type="button" ';
-    $output .=     'id="'.$ADD_BASE_ID.'_button" ';
+    $output .=   'id="'  .$ADD_BASE_ID.'_button" ';
     $output .=   'name="'.$ADD_BASE_ID.'_button" ';
+    $output .=   'title="Add a new entry" ';
     $output .=   'onclick="addItem()">';
     $output .= '<i class="fa fa-plus fa-fw"></i>';
     $output .= '</button>';
