@@ -87,20 +87,22 @@
             var descId   = <?php echo '"' . formId($DESCRIPTION_BASE_ID,    '" + item_id + "') . '"'; ?>;
             var editId   = <?php echo '"' . formId($EDIT_BASE_ID,           '" + item_id + "') . '"'; ?>;
             var buttonId = <?php echo '"' . formId($EDIT_BASE_ID.'_button', '" + item_id + "') . '"'; ?>;
-            var oldDesc = document.getElementById(descId);
+            var desc = document.getElementById(descId);
 
-            if (oldDesc) {
+            if (desc) {
                 // Not in edit mode - create new edit field.
-                var newDesc = document.createElement("input");
-                newDesc.type = "text";
-                newDesc.className = "listeditor";
-                newDesc.id =   editId;
-                newDesc.name = editId;
-                newDesc.value = item_description;
-                oldDesc.parentNode.replaceChild(newDesc, oldDesc);
+                var field = document.createElement("input");
+                field.type = "text";
+                field.className = "listeditor";
+                field.id =   editId;
+                field.name = editId;
+                field.value = item_description;
+                desc.parentNode.replaceChild(field, desc);
                 // Update edit button.
                 var button = document.getElementById(buttonId);
                 button.innerHTML = '<i class="fa fa-arrow-right fa-fw"></i>';
+                // Finally give the new field focus.
+                field.focus();
             } else {
                 // Already in edit mode, just submit the form as requested.
                 document.getElementById("list_form").submit();
@@ -126,6 +128,8 @@
                 button.parentNode.insertBefore(field, button);
                 // Update add button.
                 button.innerHTML = '<i class="fa fa-arrow-right fa-fw"></i>';
+                // Finally give the new field focus.
+                field.focus();
             }
         }
     </script>
