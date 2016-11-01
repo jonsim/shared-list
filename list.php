@@ -73,6 +73,7 @@
 
 <head>
     <title>Xmas List</title>
+    <meta name="robots" content="noindex, nofollow" />
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="https://use.fontawesome.com/141f2d0518.js"></script>
     <script>
