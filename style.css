@@ -190,7 +190,7 @@ span.listcontent
     display: inline-block;
     vertical-align: top;
     text-align: left;
-    margin-top: 1px;
+    padding-top: 4px;
     min-height: 25px;
 }
 span.listcontent:hover
