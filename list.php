@@ -10,7 +10,7 @@
     include 'database_access.php';
     include 'list_draw.php';
 
-    $not_logged_in_redirect =     $server_base;
+    $not_logged_in_redirect = $server_base;
 
     # Disable page caching.
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
@@ -18,14 +18,19 @@
     header("Pragma: no-cache");
     header("Expires: Sun, 01 Jan 2014 00:00:00 GMT");
 
-    # First ensure there is a user view requested.
+    # Handle GET requests.
+    # First ensure a user has been specified.
     if (isset($_GET['user'])) {
         $this_user_name = $_GET['user'];
     } else {
         # Some sneaky monkey is trying to get here without being logged in. Back to square one wise guy.
         header('Location: ' . filter_var($not_logged_in_redirect, FILTER_SANITIZE_URL));
     }
-    
+    # Set the alias flag. This flag is used to allow 'alias' accounts managed by
+    # a single user and will prevent bought status being shown at all (otherwise
+    # it would be shown including on the user's other accounts).
+    $is_alias_user = isset($_GET['alias']);
+
     # Handle the database interface.
     $db_handle = dbConnect();
     # Check the user is valid.
@@ -36,7 +41,7 @@
         header('Location: ' . filter_var($not_logged_in_redirect, FILTER_SANITIZE_URL));
     }
 
-    # Handle All POST requests.
+    # Handle POST requests.
     # Handle adds
     if (isset($_POST[$ADD_BASE_ID])) {
         $item_description = $_POST[$ADD_BASE_ID];
@@ -154,7 +159,7 @@
             echo '<ul>';
             foreach ($user['items'] as $item) {
                 $item_id = $item['item_id'];
-                $is_bought = (strcmp($item['bought'], "1") == 0);
+                $is_bought = (strcmp($item['bought'], "1") == 0) && !$is_alias_user;
                 $buyer_is_this_user = (((int) $item['buyer_id']) == $this_user_id);
                 echo '<li>';
                 echo drawDescription($item_id, $item['description'], $is_this_user, $is_bought);
@@ -163,7 +168,7 @@
                     # If this is the current user - print edit and delete.
                     echo drawEditButton($item_id, $item['description']);
                     echo drawDeleteButton($item_id);
-                } else {
+                } else if (!$is_alias_user) {
                     # Otherwise add the bought button if unbought, or un-buy if
                     # bought and bought by the current user.
                     if (!$is_bought) {
