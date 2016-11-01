@@ -10,11 +10,6 @@ Intended to be sufficiently minimalist and general purpose to be easily
 extensible to add to at a later date.
 
 
-## In Depth
-
-TBD
-
-
 ## License
 
 Released under GPLv3.
@@ -22,3 +17,4 @@ Released under GPLv3.
 
 ## To Do
 - Add a user/group type layer (currently a flat single group).
+- Add a UI for creating users or managing lists.
