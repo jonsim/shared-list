@@ -145,7 +145,11 @@
     <h1 class="banner">Simmonds Xmas List 2016</h1>
 
     <?php
-        echo '<form id="list_form" method="POST" action="list.php?user='.$this_user_name.'" id="listForm">';
+        $form_redir_query = 'user='.$this_user_name;
+        if ($is_alias_user) {
+            $form_redir_query .= '&alias';
+        }
+        echo '<form id="list_form" method="POST" action="list.php?'.$form_redir_query.'" id="listForm">';
 
         # Add a hidden default button. This prevents accidentally performing
         # random actions when pressing CR on some browsers which interpret CR as
