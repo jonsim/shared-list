@@ -1,0 +1,248 @@
+/* Metrics:
+ * Site width:              1000px - 600px
+ * Content box width:       as above
+ * Content box padding:     15px all sides
+ * Content box inner width: 970px - 570px
+*/
+
+
+
+
+/*********** FONT DEFINITIONS ***********/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+
+/*********** GENERAL SITE WIDE PROPERTIES ***********/
+/* Window properties */
+html, body
+{
+    padding: 0;
+    margin:  0;
+    text-align: center;
+    background-color: #fff;
+}
+
+/* Font setup */
+body
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size:   11pt; /* ~10.5 pt */
+}
+
+a, a:visited
+{
+    text-decoration: none;
+    color: #4099ee;
+}
+a:hover
+{
+    text-decoration: underline;
+    color: #0b66dd;
+}
+
+
+
+/*********** DIV PROPERTIES ***********/
+/* General div properties (red dashed line for debugging) */
+div
+{
+    /*outline: 1px red dashed;*/
+    padding: 0;
+    margin:  0;
+}
+
+/* fully wraps the entire site */
+div.body
+{
+    min-height: 100%;
+	height:     auto !important;
+	height:     100%;
+
+    min-width:  600px;
+    max-width:  600px;
+
+	margin: 0 auto;
+    padding: 30px 0 0 0;
+
+    text-align:   justify;
+}
+
+p
+{
+    margin: 0;
+}
+p + p, img.inline + p
+{
+    margin-top: 1em;
+}
+p.padded
+{
+    margin-bottom: 1em;
+}
+p.error
+{
+    color: #f33
+}
+
+h1
+{
+    display:    block;
+    min-width:  600px;
+    max-width:  600px;
+
+    text-align: left;
+    clear:      both;
+
+    margin:  40px 0 10px 0;
+    padding: 5px  0 5px  0px;
+
+	font-weight:    normal;
+	font-size:      18pt;
+    text-transform: none;
+
+    color:       #444;
+    text-shadow: 1px 1px 0px #ccc;
+}
+h1.banner
+{
+    text-align: center;
+    font-size: 32pt;
+    margin: 60px 0;
+}
+h2
+{
+    margin:  40px 0 10px 0;
+
+    font-style:  normal;
+    font-weight: bold;
+    font-size:   12pt;
+    text-transform: uppercase;
+    color:       #999;
+}
+h3
+{
+    margin: 5px 0;
+    font-weight: bold;
+    font-size:   11pt;
+}
+.first
+{
+    margin-top: 0 !important;
+}
+
+/* Button-style link configuration */
+a.button_style, a.button_style:visited
+{
+    padding: 7px 14px;
+
+    line-height: 8em;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+
+    background-color: #ffaa77;
+}
+a.button_style:hover
+{
+    background-color: #eee;
+}
+
+div.image_wrapper, div.video_wrapper
+{
+    position: relative;
+    display: block;
+
+    max-width: 600px;
+    min-width: 600px;
+    padding-bottom: 75%;
+
+    margin: 10px 0 10px 0;
+
+    background-color: #fff;
+
+    clear:   both;
+}
+img.full_width
+{
+    margin: 0 0 5px 0;
+    padding: 0;
+    width: 100%;
+}
+img.inline, iframe.inline
+{
+    position: absolute;
+    top:  0;
+    left: 0;
+    width:  100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* List config */
+ul
+{
+    font-size: 10pt;
+}
+span.listcontent
+{
+    width: 400px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    margin-top: 1px;
+    min-height: 25px;
+}
+span.listcontent:hover
+{
+    background-color: #f0f0f0;
+}
+button
+{
+    padding: 2px;
+    margin: 1px;
+    background-color: #eee;
+    border: 1px solid #555;
+    min-height: 25px;
+}
+button:hover
+{
+    background-color: #ddd;
+}
+button#form_default
+{
+    overflow: visible !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+}
+/* Form input text config */
+input[type="text"], input[type="password"]
+{
+    width: 150px;
+    padding: 2px 4px;
+    margin: 0 5px;
+    
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+}
+input[type="text"]:focus, input[type="password"]:focus
+{
+    border: 1px solid #444;
+    outline: none;
+}
+input.listeditor
+{
+    width: 390px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0px 1px;
+    padding: 0px 3px;
+    min-height: 25px;
+}
+
