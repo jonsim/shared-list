@@ -10,7 +10,13 @@
     include 'database_access.php';
     include 'list_draw.php';
 
-    $not_logged_in_redirect =     $server_base . '/index.php';
+    $not_logged_in_redirect =     $server_base;
+
+    # Disable page caching.
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: Sun, 01 Jan 2014 00:00:00 GMT");
 
     # First ensure there is a user view requested.
     if (isset($_GET['user'])) {
